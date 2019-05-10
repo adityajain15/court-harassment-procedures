@@ -3,9 +3,9 @@
     <a href="https://thewire.in/"><img src="logo.svg" style="background: red;" class="pa2 w-60 w-20-ns center cursor db"/></a>
     <div id="victim_options">
       <span class="db bold f3">Choose the Victim's identity</span>
-      <button 
-        v-for="(victim, index) in victim_categories" 
-        :key="`victim-${index}`" 
+      <button
+        v-for="(victim, index) in victim_categories"
+        :key="`victim-${index}`"
         class="pa2 ma2 bg-white"
         @click="setVictim(victim)"
         :style="victim_selected === victim ? 'background: black; color: white;':''">
@@ -15,19 +15,19 @@
 
     <div id="accused_options" class="mv4">
       <span class="db bold f3">Choose the Accused's identity</span>
-      <button v-for="(accused, index) in accused_categories" 
-      :key="`accused-${index}`" 
+      <button v-for="(accused, index) in accused_categories"
+      :key="`accused-${index}`"
       class="pa2 ma2  bg-white"
       @click="setAccused(accused)"
       :style="accused_selected === accused ? 'background: black; color: white;':''">
         {{accused}}
       </button>
     </div>
-    
+
     <div id="cardContainer" class="w-100">
-      <div 
-      v-if="scenarios[victim_selected] !== undefined && scenarios[victim_selected][accused_selected]!==undefined" 
-      v-for="(scenario, index) in scenarios[victim_selected][accused_selected]" 
+      <div
+      v-if="scenarios[victim_selected] !== undefined && scenarios[victim_selected][accused_selected]!==undefined"
+      v-for="(scenario, index) in scenarios[victim_selected][accused_selected]"
       :key="`card-${index}`"
       class="w-100 w-25-ns dib v-top pa2">
         <div class="ba bw2">
@@ -56,16 +56,16 @@ export default {
   async mounted () {
     const data = await csv('./scenarios.csv')
     this.scenarios = nest()
-      .key(d=>d.victim)
-      .key(d=>d.accused)
+      .key(d => d.victim)
+      .key(d => d.accused)
       .object(data)
 
     for (let victim in this.scenarios) {
-      if(!this.victim_categories.includes(victim)) {
+      if (!this.victim_categories.includes(victim)) {
         this.victim_categories.push(victim)
       }
       for (let accused in this.scenarios[victim]) {
-        if(!this.accused_categories.includes(accused)) {
+        if (!this.accused_categories.includes(accused)) {
           this.accused_categories.push(accused)
         }
       }
@@ -100,7 +100,7 @@ export default {
   bottom: 0;
   right: 0;
   position: absolute;
-  z-index: -1; 
+  z-index: -1;
 }*/
 
 button {
